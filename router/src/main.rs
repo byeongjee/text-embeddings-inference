@@ -202,6 +202,7 @@ struct Args {
 
 #[tokio::main]
 async fn main() -> Result<()> {
+    smart_migration::init()?;
     // Pattern match configuration
     let args: Args = Args::parse();
 

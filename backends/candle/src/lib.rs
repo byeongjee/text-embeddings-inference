@@ -11,8 +11,9 @@ use candle::{DType, Device};
 use candle_nn::VarBuilder;
 use nohash_hasher::BuildNoHashHasher;
 use serde::{de::Deserializer, Deserialize};
+use smart_migration::Reinitializable;
 use std::collections::HashMap;
-use std::path::Path;
+use std::path::{Path, PathBuf};
 use text_embeddings_backend_core::{
     Backend, BackendError, Batch, Embedding, Embeddings, ModelType, Predictions,
 };
@@ -153,19 +154,49 @@ enum Config {
     Llama(LlamaConfig),
 }
 
+/// The weights and what they were loaded from: the sweep keeps only the
+/// arguments of `new`, and restoring loads the model again.
+#[derive(Reinitializable)]
+#[reinitializable(
+    saved = (PathBuf, String, ModelType, Option<Vec<String>>),
+    save = CandleBackend::settings,
+    restore = CandleBackend::from_settings
+)]
 pub struct CandleBackend {
     device: Device,
     model: Box<dyn Model + Send>,
     dense_layers: Vec<Box<dyn DenseLayer + Send>>,
+    settings: (PathBuf, String, ModelType, Option<Vec<String>>),
 }
 
 impl CandleBackend {
+    fn settings(self) -> (PathBuf, String, ModelType, Option<Vec<String>>) {
+        self.settings
+    }
+
+    fn from_settings(
+        (model_path, dtype, model_type, dense_paths): (
+            PathBuf,
+            String,
+            ModelType,
+            Option<Vec<String>>,
+        ),
+    ) -> Self {
+        Self::new(&model_path, dtype, model_type, dense_paths).expect("cannot load the model again")
+    }
+
     pub fn new(
         model_path: &Path,
         dtype: String,
         model_type: ModelType,
         dense_paths: Option<Vec<String>>,
     ) -> Result<Self, BackendError> {
+        let settings = (
+            model_path.to_path_buf(),
+            dtype.clone(),
+            model_type.clone(),
+            dense_paths.clone(),
+        );
         // Default files
         let default_safetensors = model_path.join("model.safetensors");
         let default_pytorch = model_path.join("pytorch_model.bin");
@@ -632,6 +663,7 @@ impl CandleBackend {
             device,
             model: model?,
             dense_layers,
+            settings,
         })
     }
 }
