@@ -171,7 +171,7 @@ pub struct CandleBackend {
 
 impl CandleBackend {
     fn settings(self) -> (PathBuf, String, ModelType, Option<Vec<String>>) {
-        self.settings
+        self.settings.clone()
     }
 
     fn from_settings(
