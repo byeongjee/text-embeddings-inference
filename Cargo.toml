@@ -6,6 +6,7 @@ members = [
     "backends/core",
     "backends/python",
     "backends/grpc-client",
+    "bench",
     "core",
     "router",
 ]

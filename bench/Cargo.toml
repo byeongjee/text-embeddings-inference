@@ -1,0 +1,16 @@
+[package]
+name = "tei-bench"
+version.workspace = true
+edition.workspace = true
+
+[dependencies]
+anyhow = { workspace = true }
+clap = { workspace = true }
+rand = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+smart-migration = { path = "../../../smart-migration" }
+text-embeddings-backend = { path = "../backends", features = ["candle"] }
+text-embeddings-core = { path = "../core" }
+tokenizers = { workspace = true }
+tokio = { workspace = true, features = ["macros"] }

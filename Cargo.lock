@@ -4514,6 +4514,22 @@ dependencies = [
 ]
 
 [[package]]
+name = "tei-bench"
+version = "1.9.3"
+dependencies = [
+ "anyhow",
+ "clap",
+ "rand 0.9.0",
+ "serde",
+ "serde_json",
+ "smart-migration",
+ "text-embeddings-backend",
+ "text-embeddings-core",
+ "tokenizers",
+ "tokio",
+]
+
+[[package]]
 name = "tempfile"
 version = "3.19.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
