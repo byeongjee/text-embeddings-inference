@@ -11,7 +11,7 @@ use candle::{DType, Device};
 use candle_nn::VarBuilder;
 use nohash_hasher::BuildNoHashHasher;
 use serde::{de::Deserializer, Deserialize};
-use smart_migration::Reinitializable;
+use sweep::Reinitializable;
 use std::collections::HashMap;
 use std::path::{Path, PathBuf};
 use text_embeddings_backend_core::{
@@ -158,9 +158,9 @@ enum Config {
 /// arguments of `new`, and restoring loads the model again.
 #[derive(Reinitializable)]
 #[reinitializable(
-    saved = (PathBuf, String, ModelType, Option<Vec<String>>),
-    save = CandleBackend::settings,
-    restore = CandleBackend::from_settings
+    swept = (PathBuf, String, ModelType, Option<Vec<String>>),
+    sweep = CandleBackend::settings,
+    reinitialize = CandleBackend::from_settings
 )]
 pub struct CandleBackend {
     device: Device,

@@ -2549,6 +2549,15 @@ dependencies = [
 ]
 
 [[package]]
+name = "migration"
+version = "0.1.0"
+dependencies = [
+ "libc",
+ "signal-hook",
+ "sweep",
+]
+
+[[package]]
 name = "mimalloc"
 version = "0.1.46"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -4306,25 +4315,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "51d44cfb396c3caf6fbfd0ab422af02631b69ddd96d2eff0b0f0724f9024051b"
 
 [[package]]
-name = "smart-migration"
-version = "0.1.0"
-dependencies = [
- "libc",
- "parking_lot",
- "signal-hook",
- "smart-migration-macros",
-]
-
-[[package]]
-name = "smart-migration-macros"
-version = "0.1.0"
-dependencies = [
- "proc-macro2",
- "quote",
- "syn 3.0.5",
-]
-
-[[package]]
 name = "socket2"
 version = "0.5.9"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -4393,6 +4383,24 @@ name = "subtle"
 version = "2.6.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "13c2bddecc57b384dee18652358fb23172facb8a2c51ccc10d74c157bdea3292"
+
+[[package]]
+name = "sweep"
+version = "0.1.0"
+dependencies = [
+ "libc",
+ "parking_lot",
+ "sweep-macros",
+]
+
+[[package]]
+name = "sweep-macros"
+version = "0.1.0"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "syn 3.0.5",
+]
 
 [[package]]
 name = "syn"
@@ -4519,10 +4527,11 @@ version = "1.9.3"
 dependencies = [
  "anyhow",
  "clap",
+ "migration",
  "rand 0.9.0",
  "serde",
  "serde_json",
- "smart-migration",
+ "sweep",
  "text-embeddings-backend",
  "text-embeddings-core",
  "tokenizers",
@@ -4584,7 +4593,7 @@ dependencies = [
  "serde",
  "serde_json",
  "serial_test",
- "smart-migration",
+ "sweep",
  "text-embeddings-backend-core",
  "thiserror 1.0.69",
  "tokenizers",
@@ -4668,6 +4677,7 @@ dependencies = [
  "libc",
  "metrics",
  "metrics-exporter-prometheus",
+ "migration",
  "mimalloc",
  "num_cpus",
  "opentelemetry 0.23.0",
@@ -4679,7 +4689,7 @@ dependencies = [
  "serde_json",
  "serial_test",
  "simsimd",
- "smart-migration",
+ "sweep",
  "text-embeddings-backend",
  "text-embeddings-core",
  "thiserror 1.0.69",
