@@ -202,7 +202,7 @@ struct Args {
 
 #[tokio::main]
 async fn main() -> Result<()> {
-    migration::init()?;
+    sweep::start_signal_trigger()?;
     // Pattern match configuration
     let args: Args = Args::parse();
 

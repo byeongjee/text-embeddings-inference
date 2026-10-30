@@ -9,7 +9,6 @@ clap = { workspace = true }
 rand = { workspace = true }
 serde = { workspace = true }
 serde_json = { workspace = true }
-migration = { path = "../../../migration" }
 sweep = { path = "../../../sweep" }
 text-embeddings-backend = { path = "../backends", features = ["candle"] }
 text-embeddings-core = { path = "../core" }

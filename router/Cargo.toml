@@ -15,7 +15,6 @@ name = "text-embeddings-router"
 path = "src/main.rs"
 
 [dependencies]
-migration = { path = "../../../migration" }
 sweep = { path = "../../../sweep" }
 anyhow = { workspace = true }
 text-embeddings-backend = { path = "../backends", features = ["clap"] }

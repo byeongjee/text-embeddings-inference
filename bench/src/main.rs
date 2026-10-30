@@ -78,7 +78,7 @@ struct SinkRecord {
 
 #[tokio::main]
 async fn main() -> Result<()> {
-    migration::init()?;
+    sweep::start_signal_trigger()?;
     let cli = Cli::parse();
     let start = Instant::now();
 

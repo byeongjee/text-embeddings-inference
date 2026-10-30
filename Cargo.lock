@@ -2549,15 +2549,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "migration"
-version = "0.1.0"
-dependencies = [
- "libc",
- "signal-hook",
- "sweep",
-]
-
-[[package]]
 name = "mimalloc"
 version = "0.1.46"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -4390,6 +4381,7 @@ version = "0.1.0"
 dependencies = [
  "libc",
  "parking_lot",
+ "signal-hook",
  "sweep-macros",
 ]
 
@@ -4527,7 +4519,6 @@ version = "1.9.3"
 dependencies = [
  "anyhow",
  "clap",
- "migration",
  "rand 0.9.0",
  "serde",
  "serde_json",
@@ -4677,7 +4668,6 @@ dependencies = [
  "libc",
  "metrics",
  "metrics-exporter-prometheus",
- "migration",
  "mimalloc",
  "num_cpus",
  "opentelemetry 0.23.0",
